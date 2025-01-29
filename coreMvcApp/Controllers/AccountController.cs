@@ -25,5 +25,12 @@ namespace coreMvcApp.Controllers
             ViewBag.Error = "Invalid Credentials..!";
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            // Remove Session
+            HttpContext.Session.Remove("uname");
+            return RedirectToAction("Login");
+        }
     }
 }
