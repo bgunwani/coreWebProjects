@@ -1,0 +1,21 @@
+﻿@model coreMvcApp.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="card" style="width: 28rem;">
+    <div class="card-header">
+        Details of @Model.Name
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Id: @Model.Id</li>
+        <li class="list-group-item">Name: @Model.Name</li>
+        <li class="list-group-item">Salary: @Model.Salary</li>
+    </ul>
+    <div class="card-footer">
+        <a class="btn btn-secondary" asp-action="Index">Go To List</a>
+    </div>
+</div>
+
+

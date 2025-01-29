@@ -1,0 +1,39 @@
+﻿@model List<coreMvcApp.Models.Employee> 
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>@ViewBag.Message</h3>
+
+<br /> <br />
+<a asp-action="Create" class="btn btn-secondary">Create New Employee</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Salary</td>
+                <td>
+                    <a asp-controller="Employee" asp-action="Details" asp-route-id="@item.Id">View Detail</a> |
+                    <a asp-controller="Employee" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

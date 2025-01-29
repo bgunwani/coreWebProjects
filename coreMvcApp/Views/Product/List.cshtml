@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<h4>@ViewData["Message"]</h4>
+<p>There are @ViewData["ProductCount"] products in the list.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewData["Products"] as List<Product>)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
