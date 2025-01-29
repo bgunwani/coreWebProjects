@@ -1,9 +1,11 @@
-﻿using coreMvcApp.Models;
+﻿using coreMvcApp.Filters;
+using coreMvcApp.Models;
 using coreMvcApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace coreMvcApp.Controllers
 {
+    [AuthorizeUser]
     public class EmployeeController : Controller
     {
         public IActionResult Index()
@@ -12,6 +14,7 @@ namespace coreMvcApp.Controllers
             var employees = EmployeeRepository.GetAll();
             return View(employees);
         }
+
         public IActionResult Details(int id)
         {
             var employee = EmployeeRepository.GetById(id);

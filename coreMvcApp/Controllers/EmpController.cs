@@ -1,10 +1,12 @@
-﻿using coreMvcApp.Models;
+﻿using coreMvcApp.Filters;
+using coreMvcApp.Models;
 using coreMvcApp.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace coreMvcApp.Controllers
 {
+    [AuthorizeUser]
     public class EmpController : Controller
     {
         // GET: EmpController

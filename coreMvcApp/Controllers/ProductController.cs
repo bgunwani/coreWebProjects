@@ -1,9 +1,11 @@
-﻿using coreMvcApp.Models;
+﻿using coreMvcApp.Filters;
+using coreMvcApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace coreMvcApp.Controllers
 {
+    [AuthorizeUser]
     public class ProductController : Controller
     {
         static List<Product> products =

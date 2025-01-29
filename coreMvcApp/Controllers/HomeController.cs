@@ -16,12 +16,12 @@ namespace coreMvcApp.Controllers
         public IActionResult Index()
         {
             // Check if session exists
-            string? uname = HttpContext.Session.GetString("uname");
-            if(string.IsNullOrEmpty(uname))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            ViewBag.Username = uname;
+            //string? uname = HttpContext.Session.GetString("uname");
+            //if(string.IsNullOrEmpty(uname))
+            //{
+            //    return RedirectToAction("Login", "Account");
+            //}
+            //ViewBag.Username = uname;
             return View();
         }
 
