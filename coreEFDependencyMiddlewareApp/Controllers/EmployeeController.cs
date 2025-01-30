@@ -18,7 +18,12 @@ namespace coreEFDependencyMiddlewareApp.Controllers
         // GET: EmployeeController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
+            if(employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
         }
 
         // GET: EmployeeController/Create
@@ -30,10 +35,12 @@ namespace coreEFDependencyMiddlewareApp.Controllers
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Employee employee)
         {
             try
             {
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -45,16 +52,23 @@ namespace coreEFDependencyMiddlewareApp.Controllers
         // GET: EmployeeController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
         }
 
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Employee employee)
         {
             try
             {
+                _context.Employees.Update(employee);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -66,16 +80,23 @@ namespace coreEFDependencyMiddlewareApp.Controllers
         // GET: EmployeeController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var employee = _context.Employees.FirstOrDefault(x => x.Id == id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return View(employee);
         }
 
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Employee employee)
         {
             try
             {
+                _context.Employees.Remove(employee);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
