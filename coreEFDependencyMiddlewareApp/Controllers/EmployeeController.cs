@@ -6,7 +6,13 @@ namespace coreEFDependencyMiddlewareApp.Controllers
 {
     public class EmployeeController : Controller
     {
-        private ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _context;
+
+        public EmployeeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
 
         // GET: EmployeeController
         public ActionResult Index()

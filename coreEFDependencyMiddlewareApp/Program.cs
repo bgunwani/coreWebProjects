@@ -1,11 +1,18 @@
+using coreEFDependencyMiddlewareApp.Models;
 using coreEFDependencyMiddlewareApp.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Register Dependency in IOC Container:
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// Register Dependency in IOC Container
 builder.Services.AddSingleton<IMessageService, MessageService>();
 
 var app = builder.Build();
