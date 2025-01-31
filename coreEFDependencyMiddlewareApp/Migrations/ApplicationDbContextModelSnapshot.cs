@@ -36,7 +36,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasKey("AuthorId");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.Book", b =>
@@ -58,7 +58,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Books");
+                    b.ToTable("Books", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.BookDetail", b =>
@@ -84,7 +84,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
                     b.HasIndex("BookId")
                         .IsUnique();
 
-                    b.ToTable("BookDetails");
+                    b.ToTable("BookDetails", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.BookPublisher", b =>
@@ -99,7 +99,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasIndex("PublisherId");
 
-                    b.ToTable("BookPublishers");
+                    b.ToTable("BookPublishers", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.Customer", b =>
@@ -132,7 +132,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.Employee", b =>
@@ -157,7 +157,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.Publisher", b =>
@@ -174,7 +174,7 @@ namespace coreEFDependencyMiddlewareApp.Migrations
 
                     b.HasKey("PublisherId");
 
-                    b.ToTable("Publishers");
+                    b.ToTable("Publishers", (string)null);
                 });
 
             modelBuilder.Entity("coreEFDependencyMiddlewareApp.Models.Book", b =>

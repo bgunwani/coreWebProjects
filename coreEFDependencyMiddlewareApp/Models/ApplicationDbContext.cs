@@ -30,6 +30,19 @@ namespace coreEFDependencyMiddlewareApp.Models
                 .WithMany(b => b.BookPublishers)
                 .HasForeignKey(bp => bp.PublisherId);
 
+            // One TO Many
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Author)
+                .WithMany(b => b.Books)
+                .HasForeignKey(b => b.AuthorId);
+
+            // One To One
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.BookDetail)
+                .WithOne(bd => bd.Book)
+                .HasForeignKey<BookDetail>(bd => bd.BookId);
+
+
 
 
         }
