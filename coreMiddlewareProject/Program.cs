@@ -1,3 +1,5 @@
+using coreMiddlewareProject.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,48 +13,17 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 
-app.Use(async (context, next) =>
-{
-    // Request Logic
-    // Console.WriteLine($"Request Path: {context.Request.Path}");
-    Console.WriteLine("Middleware A (Request) => ");
-    // Call the next Middleware
-    await next.Invoke();
-    // Response Logic
-    Console.WriteLine("Middleware A (Response)");
-});
+// Register Custom Middleware to Request Pipeline
+app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.Use(async (context, next) =>
-{
-    // Request Logic
-    // Console.WriteLine($"Request Path: {context.Request.Path}");
-    Console.WriteLine("Middleware B (Request) => ");
-    // Call the next Middleware
-    await next.Invoke();
-    // Response Logic
-    Console.WriteLine("Middleware B (Response) => ");
-});
+app.UseStaticFiles();
 
-app.Use(async (context,next) =>
-{
-    // Request Logic
-    // Console.WriteLine($"Request Path: {context.Request.Path}");
-    Console.WriteLine("Middleware C (Request) => ");
-    // Call the next Middleware
-    await next.Invoke();
-    // Response Logic
-    Console.WriteLine("Middleware C (Response) => ");
-});
+app.UseRouting();
 
+app.UseAuthorization();
 
-//app.UseStaticFiles();
-
-//app.UseRouting();
-
-//app.UseAuthorization();
-
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
