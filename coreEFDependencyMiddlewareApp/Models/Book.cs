@@ -13,5 +13,6 @@ namespace coreEFDependencyMiddlewareApp.Models
         // Navigation Properties
         public BookDetail? BookDetail { get; set; }
         public Author? Author { get; set; }
+        public List<BookPublisher>? BookPublishers { get; set; }
     }
 }
