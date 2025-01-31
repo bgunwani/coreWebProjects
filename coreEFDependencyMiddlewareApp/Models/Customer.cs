@@ -8,7 +8,7 @@ namespace coreEFDependencyMiddlewareApp.Models
         [Key]
         public int CustomerId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "FirstName is required.")]
         [MinLength(8)]
         public string FirstName { get; set; } = string.Empty;
 
