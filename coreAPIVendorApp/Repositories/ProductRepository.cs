@@ -1,38 +1,46 @@
-﻿using coreAPIVendorApp.Models;
+﻿using coreAPIVendorApp.Data;
+using coreAPIVendorApp.Models;
 
 namespace coreAPIVendorApp.Repositories
 {
     public class ProductRepository : IProductRepository
     {
+        private ApplicationDbContext _context;
 
-        private static List<Product> _products = new List<Product>()
+        public ProductRepository(ApplicationDbContext context) 
         {
-            new Product { Id = 1, Name = "Laptop", Price = 1200},
-            new Product { Id = 2, Name = "Phone", Price = 2200},
-            new Product { Id = 3, Name = "Keyboard", Price = 1000},
-        };
+            _context = context;
+        }
 
-        public void Add(Product product) => _products.Add(product);
+        public void Add(Product product)
+        {
+            _context.Products.Add(product);
+            _context.SaveChanges();
+        }
 
-        public void Delete(int id) => _products.RemoveAll(p => p.Id == id);
+        public void Delete(int id)
+        {
+            Product? product = _context.Products.FirstOrDefault(x => x.Id == id);
+            if (product != null)
+            {
+                _context.Products.Remove(product);
+                _context.SaveChanges();
+            }
+        }
 
-        public List<Product> GetAll() => _products;
+        public List<Product> GetAll() => _context.Products.ToList();
 
-        public Product? GetById(int id) => _products.FirstOrDefault(x => x.Id == id);
+        public Product? GetById(int id) => _context.Products.FirstOrDefault(x => x.Id == id);
 
         public void Update(Product product)
         {
-            var existingProduct = _products.FirstOrDefault(p => p.Id == product.Id);
-            if(existingProduct != null)
-            {
-                existingProduct.Name = product.Name;
-                existingProduct.Price = product.Price;
-            }
+            _context.Products.Update(product);
+            _context.SaveChanges();
         }
 
         public void PatchProduct(int id, decimal? price, string? name)
         {
-            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
+            var existingProduct = _context.Products.FirstOrDefault(p => p.Id == id);
             if (existingProduct != null)
             {
                 if(price.HasValue) existingProduct.Price = price.Value;
