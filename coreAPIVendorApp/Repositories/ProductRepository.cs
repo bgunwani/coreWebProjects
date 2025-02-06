@@ -29,5 +29,15 @@ namespace coreAPIVendorApp.Repositories
                 existingProduct.Price = product.Price;
             }
         }
+
+        public void PatchProduct(int id, decimal? price, string? name)
+        {
+            var existingProduct = _products.FirstOrDefault(p => p.Id == id);
+            if (existingProduct != null)
+            {
+                if(price.HasValue) existingProduct.Price = price.Value;
+                if(!string.IsNullOrEmpty(name)) existingProduct.Name = name;
+            }
+        }
     }
 }

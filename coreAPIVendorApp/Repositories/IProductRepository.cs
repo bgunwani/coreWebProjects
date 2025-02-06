@@ -9,5 +9,6 @@ namespace coreAPIVendorApp.Repositories
         public void Add(Product product);
         public void Update(Product product);
         public void Delete(int id);
+        public void PatchProduct(int id, decimal? price, string? name);
     }
 }

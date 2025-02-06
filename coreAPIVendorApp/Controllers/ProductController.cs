@@ -1,7 +1,10 @@
 ﻿using coreAPIVendorApp.Models;
 using coreAPIVendorApp.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Collections.Generic;
 
 namespace coreAPIVendorApp.Controllers
 {
@@ -9,7 +12,12 @@ namespace coreAPIVendorApp.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductRepository _productRepository = new ProductRepository();
+        private readonly IProductRepository _productRepository;
+
+        public ProductController(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
 
         [HttpGet]
         public ActionResult<List<Product>> GetProducts()
@@ -40,6 +48,16 @@ namespace coreAPIVendorApp.Controllers
         public ActionResult DeleteProduct(int id)
         {
             _productRepository.Delete(id);
+            return NoContent();
+        }
+        [HttpPatch("{id}")]
+        public ActionResult PatchProduct(int id, [FromBody] JsonPatchDocument<Product> patchDoc)
+        {
+            var product = _productRepository.GetById(id);
+            if (product == null) return NotFound();
+
+            patchDoc.ApplyTo(product); // Removed ModelState validation
+
             return NoContent();
         }
 
