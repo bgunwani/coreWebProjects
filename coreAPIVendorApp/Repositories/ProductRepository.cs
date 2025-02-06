@@ -12,15 +12,9 @@ namespace coreAPIVendorApp.Repositories
             new Product { Id = 3, Name = "Keyboard", Price = 1000},
         };
 
-        public void Add(Product product)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(Product product) => _products.Add(product);
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(int id) => _products.RemoveAll(p => p.Id == id);
 
         public List<Product> GetAll() => _products;
 
@@ -28,7 +22,12 @@ namespace coreAPIVendorApp.Repositories
 
         public void Update(Product product)
         {
-            throw new NotImplementedException();
+            var existingProduct = _products.FirstOrDefault(p => p.Id == product.Id);
+            if(existingProduct != null)
+            {
+                existingProduct.Name = product.Name;
+                existingProduct.Price = product.Price;
+            }
         }
     }
 }
