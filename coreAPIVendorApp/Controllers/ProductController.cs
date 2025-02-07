@@ -1,5 +1,6 @@
 ﻿using coreAPIVendorApp.Models;
 using coreAPIVendorApp.Repositories;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace coreAPIVendorApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AngularAppPolicy")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
